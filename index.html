@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Malla Curricular Interactiva</title>
+<style>
+  :root{
+    --bg:#f6f8fb;
+    --card:#ffffff;
+    --muted:#69707a;
+    --accent:#7aa7c7;
+    --accent-2:#a3d3e9;
+    --success:#78c281;
+    --danger:#f08b8b;
+    --glass: rgba(255,255,255,0.6);
+    --shadow: 0 6px 18px rgba(23,40,60,0.06);
+    --radius:12px;
+    font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  }
+
+  html,body{
+    height:100%;
+    margin:0;
+    background: linear-gradient(180deg, var(--bg), #eef6fb 100%);
+    color:#233;
+  }
+
+  header{
+    padding:22px 28px;
+    display:flex;
+    gap:16px;
+    align-items:center;
+  }
+  header h1{
+    margin:0;
+    font-size:20px;
+    letter-spacing:0.2px;
+    color:#123040;
+  }
+  header p{ margin:0; color:var(--muted); font-size:13px; }
+
+  .controls{
+    margin-left:auto;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  button.btn{
+    background:var(--card);
+    border:1px solid rgba(0,0,0,0.06);
+    padding:8px 12px;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    font-weight:600;
+  }
+  button.primary{
+    background:linear-gradient(180deg,var(--accent),var(--accent-2));
+    color:#063;
+    border: none;
+    box-shadow: 0 6px 20px rgba(122,167,199,0.16);
+  }
+
+  main{
+    padding:16px 28px 48px 28px;
+  }
+
+  .grid{
+    display:grid;
+    grid-auto-flow:column;
+    grid-auto-columns: minmax(230px, 1fr);
+    gap:18px;
+    align-items:start;
+    overflow:auto;
+    padding-bottom:24px;
+  }
+
+  .cycle{
+    background: linear-gradient(180deg, rgba(255,255,255,0.8), var(--glass));
+    border-radius:var(--radius);
+    padding:14px;
+    box-shadow:var(--shadow);
+    min-width:230px;
+  }
+  .cycle h2{
+    margin:0 0 10px 0;
+    font-size:15px;
+    color:#0e2b3a;
+  }
+  .cycle .subtitle{
+    font-size:12px;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+
+  .course{
+    background:var(--card);
+    border-radius:10px;
+    padding:10px;
+    margin-bottom:10px;
+    border:1px solid rgba(0,0,0,0.04);
+    cursor:pointer;
+    position:relative;
+    transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+  }
+  .course:hover{ transform: translateY(-4px); box-shadow: 0 10px 22px rgba(16,40,60,0.06); }
+  .course.approved{
+    border:1px solid rgba(120,194,129,0.2);
+    box-shadow: 0 8px 18px rgba(120,194,129,0.08);
+    outline: 3px solid rgba(120,194,129,0.06);
+  }
+
+  .course .top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .code{
+    font-weight:700;
+    font-size:13px;
+    color:#0b3b4a;
+  }
+  .uv{
+    font-weight:700;
+    font-size:12px;
+    color:var(--muted);
+    background:rgba(11,59,74,0.04);
+    padding:4px 7px;
+    border-radius:8px;
+  }
+
+  .course .name{
+    margin-top:8px;
+    font-size:13px;
+    color:#16323b;
+  }
+  .course .type{
+    margin-top:6px;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  .overlay-block{
+    position:absolute;
+    inset:0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.8));
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    font-size:12px;
+    color:var(--muted);
+    pointer-events:none;
+  }
+
+  /* tooltip */
+  .tooltip{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:calc(100% + 8px);
+    background:#0b2a33;
+    color:white;
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:12px;
+    white-space:nowrap;
+    display:none;
+    z-index:40;
+    box-shadow: 0 8px 26px rgba(0,0,0,0.16);
+  }
+  .tooltip::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    top:100%;
+    border-left:7px solid transparent;
+    border-right:7px solid transparent;
+    border-top:7px solid #0b2a33;
+  }
+  .course.blocked:hover .tooltip{ display:block; pointer-events:none; }
+
+  .legend{
+    display:flex;
+    gap:12px;
+    margin-top:10px;
+    font-size:13px;
+    color:var(--muted);
+    align-items:center;
+  }
+  .leg-item{ display:flex; gap:8px; align-items:center; }
+  .dot{ width:14px; height:14px; border-radius:6px; display:inline-block; }
+
+  /* responsive */
+  @media (max-width:900px){
+    .grid{ grid-auto-columns:minmax(220px, 1fr); }
+  }
+  @media (max-width:640px){
+    header{flex-direction:column; align-items:flex-start;
