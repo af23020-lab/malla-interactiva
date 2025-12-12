@@ -1,140 +1,118 @@
-/* ------------------------------
-   VARIABLES DE COLOR
------------------------------- */
-:root {
-    --bg: #f4f7fb;
-    --card-bg: #ffffff;
-    --primary: #4c84d3;
-    --primary-light: #d9e6fb;
-    --success: #31c96b;
-    --success-bg: #cbffdf;
-    --text: #2d2d2d;
-    --text-light: #616161;
-    --border: #d6d6d6;
-    --locked-bg: #ececec;
-}
-
-/* Modo oscuro automático */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: #1e1e1e;
-        --card-bg: #2a2a2a;
-        --primary: #6ea4ff;
-        --primary-light: #203864;
-        --success: #38df8b;
-        --success-bg: #0f3a2b;
-        --text: #f4f4f4;
-        --border: #555;
-        --locked-bg: #3c3c3c;
-    }
-}
-
-/* ------------------------------
+<style>
+/* ============================
    ESTILOS GENERALES
------------------------------- */
+=============================== */
 body {
-    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
     margin: 0;
-    padding: 25px;
-    background: var(--bg);
-    color: var(--text);
+    padding: 0;
+    background: #f4f7fc;
+    color: #333;
 }
 
-h1 {
+/* Encabezado */
+header {
+    background: linear-gradient(135deg, #4a6cf7, #8a4af7);
+    color: white;
+    padding: 30px 20px;
     text-align: center;
-    margin-bottom: 40px;
-    font-size: 40px;
-    color: var(--primary);
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-/* ------------------------------
-   GRID DE CICLOS
------------------------------- */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 15px;
-}
-
-/* ------------------------------
-   TITULOS DE CICLO
------------------------------- */
-.ciclo-title {
-    background: var(--primary-light);
-    color: var(--primary);
+    font-size: 32px;
     font-weight: bold;
-    padding: 15px 10px;
-    border-radius: 12px;
-    text-align: center;
-    font-size: 17px;
-    border: 2px solid var(--primary);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
-/* ------------------------------
-   CAJAS DE MATERIAS
------------------------------- */
-.materia {
-    background: var(--card-bg);
-    padding: 14px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px #0002;
-    border-left: 6px solid var(--primary);
+/* Contenedor principal */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* ============================
+   TARJETAS / CURSOS
+=============================== */
+.course-card {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     cursor: pointer;
-    transition: 0.2s;
-    position: relative;
-    color: var(--text);
 }
 
-.materia:hover {
-    transform: translateY(-3px);
-    box-shadow: 0px 6px 14px #0003;
+.course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
-/* Aprobada */
-.materia.completed {
-    background: var(--success-bg);
-    border-left-color: var(--success);
-    text-decoration: line-through;
-    color: var(--text-light);
+/* Títulos */
+.course-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #4a6cf7;
+    margin-bottom: 10px;
 }
 
-/* Bloqueada */
-.materia.locked {
-    background: var(--locked-bg);
-    border-left-color: #999;
-    cursor: not-allowed;
-    opacity: 0.7;
+/* Texto */
+.course-desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #555;
 }
 
-.materia.locked:hover {
-    transform: none;
-    box-shadow: none;
+/* ============================
+   BOTONES
+=============================== */
+button {
+    background: #4a6cf7;
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* ------------------------------
-   TOOLTIP
------------------------------- */
-.tooltip {
-    visibility: hidden;
-    opacity: 0;
-    background: #1f1f1f;
-    color: #fff;
-    padding: 6px 10px;
-    border-radius: 5px;
-    font-size: 13px;
-    position: absolute;
-    top: 50%;
-    left: 105%;
-    transform: translateY(-50%);
-    white-space: nowrap;
-    box-shadow: 0 2px 6px #0005;
-    transition: 0.2s;
-    z-index: 50;
+button:hover {
+    background: #2f4fdd;
 }
 
-.materia.locked:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
+/* ============================
+   GRID PARA SEMESTRES
+=============================== */
+.semester-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
 }
+
+/* Encabezados de semestre */
+.semester-title {
+    text-align: center;
+    font-size: 27px;
+    font-weight: bold;
+    margin: 30px 0 10px;
+    color: #333;
+}
+
+/* ============================
+   INTERACCIÓN OCULTAR / MOSTRAR
+=============================== */
+.hidden {
+    display: none;
+}
+
+/* ============================
+   FOOTER
+=============================== */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: #777;
+    font-size: 14px;
+}
+</style>
+
