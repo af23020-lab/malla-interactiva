@@ -1,27 +1,33 @@
-<style>
 /* ============================
    ESTILOS GENERALES
 =============================== */
-body {
-    font-family: "Poppins", sans-serif;
+* {
     margin: 0;
     padding: 0;
-    background: #f4f7fc;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #f5f7fb;
     color: #333;
+    line-height: 1.6;
+    padding-bottom: 50px;
 }
 
 /* Encabezado */
 header {
     background: linear-gradient(135deg, #4a6cf7, #8a4af7);
     color: white;
-    padding: 30px 20px;
+    padding: 40px 20px;
     text-align: center;
-    font-size: 32px;
+    font-size: 34px;
     font-weight: bold;
+    letter-spacing: 1px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
 }
 
-/* Contenedor principal */
+/* Contenedor global */
 .container {
     max-width: 1200px;
     margin: auto;
@@ -29,90 +35,6 @@ header {
 }
 
 /* ============================
-   TARJETAS / CURSOS
-=============================== */
-.course-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    transition: 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    cursor: pointer;
-}
-
-.course-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-}
-
-/* Títulos */
-.course-title {
-    font-size: 22px;
-    font-weight: bold;
-    color: #4a6cf7;
-    margin-bottom: 10px;
-}
-
-/* Texto */
-.course-desc {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* ============================
-   BOTONES
-=============================== */
-button {
-    background: #4a6cf7;
-    border: none;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #2f4fdd;
-}
-
-/* ============================
-   GRID PARA SEMESTRES
-=============================== */
-.semester-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-/* Encabezados de semestre */
-.semester-title {
-    text-align: center;
-    font-size: 27px;
-    font-weight: bold;
-    margin: 30px 0 10px;
-    color: #333;
-}
-
-/* ============================
-   INTERACCIÓN OCULTAR / MOSTRAR
-=============================== */
-.hidden {
-    display: none;
-}
-
-/* ============================
-   FOOTER
-=============================== */
-footer {
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    color: #777;
-    font-size: 14px;
-}
-</style>
+   TARJETAS DE CURSOS / SEMESTRES
+============================
 
